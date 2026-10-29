@@ -5,7 +5,7 @@ Setup for my Arch / Omarchy machines.
 ## Structure
 
 ```
-linux/
+linux-settings/
 ├── bash/
 │   ├── init.sh      # Fresh Arch: update the system, build yay if missing
 │   └── profile.sh   # Bash functions and aliases
@@ -19,7 +19,7 @@ linux/
 Source it from `~/.bashrc`:
 
 ```sh
-source ~/Projects/settings/linux/bash/profile.sh
+source ~/Projects/linux-settings/bash/profile.sh
 ```
 
 Key functions and aliases: `connect_wifi` / `disconnect_wifi` (iwd), `find_from_port`, `find_port`, `get_ip`, `new_nodeapp`, `remove_folder [--dry-run]`, `dev` (go to `~/Projects`), `hist` (search history), `n` (nvim), `s` (fuzzy-pick a pacman package to install), and eza-backed `ls` / `ll` / `la` / `lt`.
