@@ -17,13 +17,14 @@ if ! command -v rustup &>/dev/null; then
 fi
 
 if [[ ! -d "$HOME/.nvm" ]]; then
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 fi
-# nvm.sh trips over set -u
-set +u
-source "$HOME/.nvm/nvm.sh"
-nvm install --lts
-set -u
+# nvm isn't safe under set -euo pipefail, so run it in a clean shell
+bash -c 'source "$HOME/.nvm/nvm.sh" && nvm install --lts'
+
+if ! command -v claude &>/dev/null; then
+  curl -fsSL https://claude.ai/install.sh | bash
+fi
 
 if ! command -v yay &>/dev/null; then
   build_dir=$(mktemp -d)
