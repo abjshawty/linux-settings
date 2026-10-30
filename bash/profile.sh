@@ -22,9 +22,8 @@ if command -v fzf &>/dev/null; then
   fi
 fi
 
-if command -v oh-my-posh &>/dev/null; then
-  export POSH_THEME="material"
-  eval "$(oh-my-posh init bash --config "$POSH_THEME")"
+if command -v starship &>/dev/null; then
+  eval "$(starship init bash)"
 fi
 
 # ============================================================================
