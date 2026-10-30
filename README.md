@@ -7,6 +7,7 @@ Setup for my Arch / Omarchy machines.
 ```
 linux-settings/
 ├── bash/
+│   ├── bootstrap.sh # Fresh Arch, as root: user, sudo, SSH hardening, then init.sh
 │   ├── init.sh      # Fresh Arch: update, install CLI tools, build yay if missing
 │   └── profile.sh   # Bash functions and aliases
 └── omarchy/
@@ -16,7 +17,16 @@ linux-settings/
 
 ## Bootstrap
 
-On a fresh machine, run:
+On a brand-new Arch install with only root, fetch and run the bootstrap (git isn't installed yet, but curl is):
+
+```sh
+curl -fsSLO https://raw.githubusercontent.com/abjshawty/linux-settings/main/bash/bootstrap.sh
+bash bootstrap.sh
+```
+
+Download it rather than piping it into bash, since `passwd` reads from stdin. It installs sudo, openssh and git; creates `abjshawty` in `wheel` and grants wheel sudo through `/etc/sudoers.d/10-wheel`; installs the SSH key; then turns off root and password login over SSH, after checking the config with `sshd -t`. Finally it clones this repo to `~/Projects/settings` as that user and runs `init.sh`. It's safe to re-run. Before closing the root session, check that `ssh abjshawty@<host>` works from another machine.
+
+On a machine where your user already exists, run `init.sh` directly:
 
 ```sh
 ./bash/init.sh
