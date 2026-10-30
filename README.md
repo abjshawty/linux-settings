@@ -29,15 +29,11 @@ It updates the system, then installs:
 - **rustup**, **nvm** with the latest Node LTS, and **Claude Code**, each through its official installer
 - **yay**, built from the AUR if it's missing
 
-It also enables docker, adds you to the `docker` group, and downloads the tldr pages. Log out and back in for the docker group to apply, and run `claude` once to log in. The script is safe to re-run.
+It also enables docker, adds you to the `docker` group, downloads the tldr pages, and adds two lines to `~/.bashrc`: one putting `~/.local/bin` on PATH and one sourcing `bash/profile.sh` from wherever the repo is cloned. Log out and back in for the docker group to apply, and run `claude` once to log in. The script is safe to re-run.
 
 ## Bash profile
 
-Source it from `~/.bashrc`:
-
-```sh
-source ~/Projects/linux-settings/bash/profile.sh
-```
+`init.sh` sources it from `~/.bashrc` for you. Open a new terminal after the first run to load it.
 
 It sets up the starship prompt, zoxide (`cd` is aliased to `z`), and fzf keybindings (Ctrl-R history, Ctrl-T files, Alt-C directories, listed with fd).
 
