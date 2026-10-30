@@ -14,6 +14,23 @@ linux-settings/
     └── install-hooks.sh    # Install every hook and apply the current theme
 ```
 
+## Bootstrap
+
+On a fresh machine, run:
+
+```sh
+./bash/init.sh
+```
+
+It updates the system, then installs:
+
+- **pacman packages:** neovim, docker, bat, eza, fzf, ripgrep, fd, zoxide, tealdeer, fastfetch, btop, starship, github-cli
+- **JetBrains Mono Nerd Font** for starship's icons, skipped when Omarchy's `-basic` variant is already installed
+- **rustup**, **nvm** with the latest Node LTS, and **Claude Code**, each through its official installer
+- **yay**, built from the AUR if it's missing
+
+It also enables docker, adds you to the `docker` group, and downloads the tldr pages. Log out and back in for the docker group to apply, and run `claude` once to log in. The script is safe to re-run.
+
 ## Bash profile
 
 Source it from `~/.bashrc`:
@@ -21,6 +38,8 @@ Source it from `~/.bashrc`:
 ```sh
 source ~/Projects/linux-settings/bash/profile.sh
 ```
+
+It sets up the starship prompt, zoxide (`cd` is aliased to `z`), and fzf keybindings (Ctrl-R history, Ctrl-T files, Alt-C directories, listed with fd).
 
 Key functions and aliases: `connect_wifi` / `disconnect_wifi` (iwd), `find_from_port`, `find_port`, `get_ip`, `new_nodeapp`, `remove_folder [--dry-run]`, `dev` (go to `~/Projects`), `hist` (search history), `n` (nvim), `s` (fuzzy-pick a pacman package to install), and eza-backed `ls` / `ll` / `la` / `lt`.
 
