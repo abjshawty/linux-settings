@@ -14,6 +14,14 @@ if command -v zoxide &>/dev/null; then
   alias cd='z'
 fi
 
+if command -v fzf &>/dev/null; then
+  eval "$(fzf --bash)"
+  if command -v fd &>/dev/null; then
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  fi
+fi
+
 if command -v oh-my-posh &>/dev/null; then
   export POSH_THEME="material"
   eval "$(oh-my-posh init bash --config "$POSH_THEME")"

@@ -7,7 +7,7 @@ Setup for my Arch / Omarchy machines.
 ```
 linux-settings/
 ├── bash/
-│   ├── init.sh      # Fresh Arch: update the system, build yay if missing
+│   ├── init.sh      # Fresh Arch: update, install CLI tools, build yay if missing
 │   └── profile.sh   # Bash functions and aliases
 └── omarchy/
     ├── hooks/theme-set.d/  # Make Yaak and Spotify follow the Omarchy theme
