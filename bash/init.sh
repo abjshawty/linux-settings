@@ -47,3 +47,22 @@ add_to_bashrc 'export PATH="$HOME/.local/bin:$PATH"'
 script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 add_to_bashrc "source \"$script_dir/profile.sh\""
 
+mkdir -p "$HOME/.config"
+touch "$HOME/.config/starship.toml"
+
+sudo pacman -S --needed ufw tailscale
+sudo systemctl enable --now tailscaled.service
+
+# Remove this rule if ssh should only be reachable over the tailnet
+sudo ufw allow ssh
+# ufw accepts rules for interfaces that don't exist yet, so this works before tailscale up
+sudo ufw allow in on tailscale0
+# The ssh rule keeps remote sessions reachable, so enabling here can't lock you out
+if ! sudo ufw status | grep -q '^Status: active'; then
+  sudo ufw --force enable
+fi
+sudo systemctl enable ufw.service
+
+if ! tailscale status &>/dev/null; then
+  echo "Tailscale isn't logged in: run 'sudo tailscale up' to authenticate."
+fi

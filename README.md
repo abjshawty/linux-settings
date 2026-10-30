@@ -29,7 +29,13 @@ It updates the system, then installs:
 - **rustup**, **nvm** with the latest Node LTS, and **Claude Code**, each through its official installer
 - **yay**, built from the AUR if it's missing
 
-It also enables docker, adds you to the `docker` group, downloads the tldr pages, and adds two lines to `~/.bashrc`: one putting `~/.local/bin` on PATH and one sourcing `bash/profile.sh` from wherever the repo is cloned. Log out and back in for the docker group to apply, and run `claude` once to log in. The script is safe to re-run.
+It also enables docker, adds you to the `docker` group, downloads the tldr pages, creates an empty `~/.config/starship.toml` if there isn't one, and adds two lines to `~/.bashrc`: one putting `~/.local/bin` on PATH and one sourcing `bash/profile.sh` from wherever the repo is cloned. Log out and back in for the docker group to apply, and run `claude` once to log in. The script is safe to re-run.
+
+### Firewall and Tailscale
+
+`init.sh` installs **ufw** and **tailscale**, starts `tailscaled`, and adds two ufw rules: allow ssh, and allow all traffic arriving on `tailscale0`. If ufw isn't active yet, it enables it. Your ssh session survives that because the ssh rule is already in place. If ssh should only be reachable over the tailnet, delete the public rule afterwards with `sudo ufw delete allow ssh`.
+
+If Tailscale isn't logged in, the script prints a reminder. Run `sudo tailscale up` once to authenticate.
 
 ## Bash profile
 
